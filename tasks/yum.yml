@@ -11,6 +11,7 @@
   yum:
     name: "*"
     update_cache: yes
+  when: packages_update_cache
 
 - name: yum | remove packages
   yum:

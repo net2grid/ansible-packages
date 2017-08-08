@@ -27,6 +27,7 @@
   apt:
     update_cache: yes
     cache_valid_time: "{{ packages_cache_valid_time | default(omit) }}"
+  when: packages_update_cache
 
 - name: apt | remove packages
   apt:
