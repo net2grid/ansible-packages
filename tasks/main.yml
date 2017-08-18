@@ -6,5 +6,19 @@
   tags: [packages]
   when: ansible_pkg_mgr == "yum"
 
-
-
+- name: Set variable for local aliases file path
+  local_action: stat path="~/.bash_aliases"
+  register: aliases_file
+  become: false
+​
+- name: Copy aliases file to root homedir
+  copy:
+    src: ~/.bash_aliases
+    dest: /root/.bash_aliases
+  when: aliases_file.stat.exists
+​
+- name: Copy aliases file to vagrant homedir
+  copy:
+    src: ~/.bash_aliases
+    dest: /home/vagrant/.bash_aliases
+  when: aliases_file.stat.exists
