@@ -19,7 +19,16 @@
     state: absent
   with_items: '{{ packages_remove }}'
 
-- name: yum | add packages
+- name: yum | add packages from specific repos
+  yum:
+    name: "{{ item.name }}"
+    state: present
+    disablerepo: "*"
+    enablerepo: "{{ item.repo }}"
+  with_items: '{{ packages_add_specific_repo }}'
+
+
+- name: yum | add packages from any repo
   yum:
     name: "{{ item }}"
     state: present
