@@ -27,9 +27,19 @@
     enablerepo: "{{ item.repo }}"
   with_items: '{{ packages_add_specific_repo }}'
 
-
 - name: yum | add packages from any repo
   yum:
     name: "{{ item }}"
     state: present
   with_items: '{{ packages_add }}'
+
+# versionlock
+- name: check if Yum versionlock plugin is installed
+  yum:
+    list="yum-versionlock"
+  register: versionlock_is_installed
+
+- name: Set versionlock on package "{{ item }}"
+  command: "yum versionlock {{ item }}"
+  with_items: '{{ packages_versionlock }}'
+  when:  (versionlock_is_installed.results|length == 1) or (versionlock_is_installed.results[1].yumstate != 'installed')

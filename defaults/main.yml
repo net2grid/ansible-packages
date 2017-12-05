@@ -4,5 +4,6 @@ packages_accept: []
 packages_add: []
 packages_remove: []
 packages_repos: []
+packages_versionlock: []
 packages_add_specific_repo: []
 packages_update_cache: false
