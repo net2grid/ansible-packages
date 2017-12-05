@@ -39,7 +39,7 @@
     list="yum-versionlock"
   register: versionlock_is_installed
 
-- name: Set versionlock on package "{{ item }}"
+- name: Set versionlock on packages
   command: "yum versionlock {{ item }}"
   with_items: '{{ packages_versionlock }}'
   when:  (versionlock_is_installed.results|length == 1) or (versionlock_is_installed.results[1].yumstate != 'installed')
