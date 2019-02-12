@@ -37,6 +37,5 @@
 
 - name: apt | add packages
   apt:
-    name: "{{ item }}"
+    name: "{{ packages_add }}"
     state: present
-  with_items: '{{ packages_add }}'

@@ -29,9 +29,8 @@
 
 - name: yum | add packages from any repo
   yum:
-    name: "{{ item }}"
+    name: "{{ packages_add }}"
     state: present
-  with_items: '{{ packages_add }}'
 
 # versionlock
 - name: check if Yum versionlock plugin is installed
